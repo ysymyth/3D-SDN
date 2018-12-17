@@ -2,9 +2,7 @@
 
 [Project][proj] | [Paper][paper] | [Poster][poster]
 
-PyTorch implementation for 3D-aware scene de-rendering and editing. Our method integrates
-disentangled representations for semantics, geometry, and appearance into a deep
-generative model. The disentanglement of semantics, geometry, and appearance supports 3D-aware scene manipulation such as
+PyTorch implementation for 3D-aware scene de-rendering and editing. Our method integrates disentangled representations for semantics, geometry, and appearance into a deep generative model. The disentanglement of semantics, geometry, and appearance supports 3D-aware scene manipulation such as
 (a) translation, (b) rotation, (c) color and texture editing, and
 (d) object removal and occlusion recovery.
 
@@ -17,14 +15,16 @@ In Neural Information Processing Systems (*NeurIPS*) 2018.
 MIT CSAIL, Tsinghua University, and Google Research.
 
 ## Framework
-Our de-renderer consists of a semantic-, a textural- and a
-geometric branch. The textural renderer and geometric renderer then learn to reconstruct the original image from the representations obtained by the de-renderer modules.
+Our de-renderer consists of a semantic-, a textural- and a geometric branch. The textural renderer and geometric renderer then learn to reconstruct the original image from the representations obtained by the de-renderer modules.
 
 <img src="assets/model.jpg" width="800px"/>
 
 ## Example Results on Cityscapes
-Example user editing results on Cityscapes. (a) We move two cars closer to the camera.
-(b) We rotate the car with different angles. (c) We recover a tiny and occluded car and move it closer. Our model can synthesize the occluded region as well as view the occluded car from the side. (d) We move a small car closer and then change its locations.
+Example user editing results on Cityscapes.
+(a) We move two cars closer to the camera.<br>
+(b) We rotate the car with different angles.<br>
+(c) We recover a tiny and occluded car and move it closer. Our model can synthesize the occluded region. <br>
+(d) We move a small car closer and then change its locations.
 
 <img src="assets/cityscapes_edit.jpg" width="800px"/>
 
@@ -111,9 +111,9 @@ python textural/edit_vkitti.py \
     --feat_normal True
 ```
 
-Then the edit results can be viewed at `./assets/example/vkitti-textural_edit_edit_60/index.html`. 
+Then the edit results can be viewed at `./assets/example/vkitti-textural_edit_edit_60/index.html`.
 
-Simply do `cd ./assets/example/vkitti-textural_edit_edit_60 && python -m http.server 1234` and use your browser to connect to the server. You can expect to see the results with intermediate 2.5D representations rendered as follows.
+Simply do `cd ./assets/example/vkitti-textural_edit_edit_60 && python -m http.server 1234` and use your browser to connect to the server. You should see the results with intermediate 2.5D representations rendered as follows.
 
 <img src="assets/results.jpg" width="800px"/>
 
@@ -204,7 +204,7 @@ If you find this useful for your research, please cite the following paper.
 For any question, please contact [Shunyu Yao](yao-sy15@mails.tsinghua.edu.cn) and [Tzu-Ming Harry Hsu](stmharry@mit.edu).
 
 ## Acknowledgements
-This work is supported by NSF #1231216, NSF #1524817, ONR MURI N00014-16-1-2007, Toyota Research Institute, and Facebook. 
+This work is supported by NSF #1231216, NSF #1524817, ONR MURI N00014-16-1-2007, Toyota Research Institute, and Facebook.
 
 The semantic branch borrows from [Semantic Segmentation on MIT ADE20K dataset in PyTorch](https://github.com/CSAILVision/semantic-segmentation-pytorch), the geometric branch borrows from [pytorch-mask-rcnn](https://github.com/multimodallearning/pytorch-mask-rcnn) and [neural_renderer](https://github.com/hiroharu-kato/neural_renderer), and the textural branch borrows from [pix2pixHD](https://github.com/NVIDIA/pix2pixHD).
 
