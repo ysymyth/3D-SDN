@@ -1,0 +1,26 @@
+name: 3dsdn
+channels:
+  - hcc
+  - defaults
+  - conda-forge
+dependencies:
+  - absl-py=0.2.2
+  - chainer=4.1.0
+  - cupy=4.1.0
+  - dominate=2.3.1
+  - future=0.17.0
+  - imageio=2.3.0
+  - matplotlib=2.2.2
+  - numpy=1.14.3
+  - pandas=0.22.0
+  - pillow=5.0.0
+  - py-opencv=3.4.1
+  - python=3.6.6
+  - pytorch=0.4.0
+  - scikit-image=0.13.1
+  - scikit-learn=0.19.1
+  - scipy=1.0.1
+  - tensorboard=1.8.0
+  - tensorboardx=1.4
+  - torchvision=0.2.1
+  - tqdm=4.23.4

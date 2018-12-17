@@ -1,0 +1,92 @@
+[
+    {
+        "world": "0006",
+        "topic": "30-deg-right",
+        "source": "00043",
+        "target": "00000",
+        "operations": [
+            {
+                "type": "modify",
+                "from": {
+                    "u": "552",
+                    "v": "251"
+                },
+                "to": {},
+                "zoom": "1.0",
+                "ry": "0.000000"
+            }
+        ]
+    },
+    {
+        "world": "0006",
+        "topic": "30-deg-right",
+        "source": "00043",
+        "target": "00001",
+        "operations": [
+            {
+                "type": "modify",
+                "from": {
+                    "u": "552",
+                    "v": "251"
+                },
+                "to": {},
+                "zoom": "1.0",
+                "ry": "0.837758"
+            }
+        ]
+    },
+    {
+        "world": "0006",
+        "topic": "30-deg-right",
+        "source": "00043",
+        "target": "00002",
+        "operations": [
+            {
+                "type": "modify",
+                "from": {
+                    "u": "552",
+                    "v": "251"
+                },
+                "to": {},
+                "zoom": "1.0",
+                "ry": "3.141593"
+            }
+        ]
+    },
+    {
+        "world": "0006",
+        "topic": "30-deg-right",
+        "source": "00043",
+        "target": "00003",
+        "operations": [
+            {
+                "type": "modify",
+                "from": {
+                    "u": "552",
+                    "v": "251"
+                },
+                "to": {},
+                "zoom": "1.0",
+                "ry": "4.188790"
+            }
+        ]
+    },
+    {
+        "world": "0006",
+        "topic": "30-deg-right",
+        "source": "00043",
+        "target": "00004",
+        "operations": [
+            {
+                "type": "modify",
+                "from": {
+                    "u": "552",
+                    "v": "251"
+                },
+                "to": {},
+                "zoom": "1.0",
+                "ry": "6.073746"
+            }
+        ]
+    }
+]

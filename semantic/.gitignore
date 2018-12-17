@@ -1,0 +1,7 @@
+*.pyc
+
+ckpt/
+vis/
+log/
+pretrained
+result/
