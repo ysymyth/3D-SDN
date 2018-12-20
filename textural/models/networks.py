@@ -284,10 +284,9 @@ class ResnetBlock(nn.Module):
 
 
 class Encoder(nn.Module):
-    def __init__(self, input_nc, output_nc, ngf=32, n_downsampling=4, norm_layer=nn.BatchNorm2d, isTrain=True, addColor=False):
+    def __init__(self, input_nc, output_nc, ngf=32, n_downsampling=4, norm_layer=nn.BatchNorm2d, isTrain=True):
         super(Encoder, self).__init__()
         self.isTrain = isTrain
-        self.addColor = addColor  # TODO: add instance-wise average color as feature
         self.output_nc = output_nc
         model = [nn.ReflectionPad2d(3), nn.Conv2d(input_nc, ngf, kernel_size=7, padding=0),
                  norm_layer(ngf), nn.ReLU(True)]
@@ -364,58 +363,6 @@ def convMeanpool(inplanes, outplanes):
     sequence += [conv3x3(inplanes, outplanes)]
     sequence += [nn.AvgPool2d(kernel_size=2, stride=2)]
     return nn.Sequential(*sequence)
-
-
-class E_ResNet_BasicBlock(nn.Module):
-    def __init__(self, inplanes, outplanes, norm_layer=None, nl_layer=None):
-        super(E_ResNet_BasicBlock, self).__init__()
-        layers = []
-        if norm_layer is not None:
-            layers += [norm_layer(inplanes)]
-        layers += [nl_layer()]
-        layers += [conv3x3(inplanes, inplanes)]
-        if norm_layer is not None:
-            layers += [norm_layer(inplanes)]
-        layers += [nl_layer()]
-        layers += [convMeanpool(inplanes, outplanes)]
-        self.conv = nn.Sequential(*layers)
-        self.shortcut = meanpoolConv(inplanes, outplanes)
-
-    def forward(self, x):
-        out = self.conv(x) + self.shortcut(x)
-        return out
-
-
-class E_ResNet(nn.Module):
-    def __init__(self, input_nc=3, output_nc=1, ndf=64, n_blocks=4,
-                 norm_layer=None, nl_layer=None, gpu_ids=[], dataset='vkitti'):
-        super(E_ResNet, self).__init__()
-        self.gpu_ids = gpu_ids
-        max_ndf = 4
-        conv_layers = [
-            nn.Conv2d(input_nc, ndf, kernel_size=4, stride=2, padding=1, bias=True)]
-        for n in range(1, n_blocks):
-            input_ndf = ndf * min(max_ndf, n)
-            output_ndf = ndf * min(max_ndf, n + 1)
-            conv_layers += [E_ResNet_BasicBlock(input_ndf,
-                                                output_ndf, norm_layer, nl_layer)]
-
-        if dataset.find('cityscapes') != -1:  # for cityscapes images: 256x512
-            conv_layers += [nl_layer(), nn.AvgPool2d(16)]
-            output_ndf *= 2
-        else:                                # for vkitti images: 192x624
-            conv_layers += [nl_layer(), nn.AvgPool2d(8)]
-            output_ndf *= 4
-
-        self.fc = nn.Sequential(*[nn.Linear(output_ndf, output_nc)])
-        self.conv = nn.Sequential(*conv_layers)
-
-    def forward(self, x):
-        x_conv = self.conv(x)
-        conv_flat = x_conv.view(x.size(0), -1)
-        #print(x.size(), x_conv.size(), conv_flat.size())
-        output = self.fc(conv_flat)
-        return output
 
 
 class MultiscaleDiscriminator(nn.Module):
