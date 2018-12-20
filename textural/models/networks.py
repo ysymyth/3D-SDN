@@ -74,40 +74,6 @@ def define_D(input_nc, ndf, n_layers_D, norm='instance', use_sigmoid=False, num_
     netD.apply(weights_init)
     return netD
 
-# E stands for global encoder
-
-
-def define_E(input_nc, output_nc, ndf, which_model_netE,
-             norm='instance', nl='relu', gpu_ids=[], dataset='vkitti'):
-    netE = None
-    use_gpu = len(gpu_ids) > 0
-    norm_layer = get_norm_layer(norm_type=norm)
-    nl = 'relu'  # use leaky relu for E
-    nl_layer = get_non_linearity(layer_type=nl)
-    if use_gpu:
-        assert(torch.cuda.is_available())
-    if which_model_netE == 'resnet_128':
-        netE = E_ResNet(input_nc, output_nc, ndf, n_blocks=4, norm_layer=norm_layer,
-                        nl_layer=nl_layer, gpu_ids=gpu_ids, dataset=dataset)
-    elif which_model_netE == 'resnet_256':
-        netE = E_ResNet(input_nc, output_nc, ndf, n_blocks=5, norm_layer=norm_layer,
-                        nl_layer=nl_layer, gpu_ids=gpu_ids, dataset=dataset)
-    elif which_model_netE == 'conv_128':
-        netE = E_NLayers(input_nc, output_nc, ndf, n_layers=4, norm_layer=norm_layer,
-                         nl_layer=nl_layer, gpu_ids=gpu_ids)
-    elif which_model_netE == 'conv_256':
-        netE = E_NLayers(input_nc, output_nc, ndf, n_layers=5, norm_layer=norm_layer,
-                         nl_layer=nl_layer, gpu_ids=gpu_ids)
-    else:
-        raise NotImplementedError(
-            'Encoder model name [%s] is not recognized' % which_model_netE)
-    # print(netE)
-    if use_gpu:
-        netE.cuda(gpu_ids[0])
-        #netE = nn.DataParallel(netE).cuda()
-    netE.apply(weights_init)
-    return netE
-
 
 def print_network(net):
     if isinstance(net, list):
